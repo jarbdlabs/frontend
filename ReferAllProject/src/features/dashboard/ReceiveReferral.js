@@ -44,7 +44,7 @@ export default function ReceiveReferral({tableHeaderName, status}) {
   const [referrals, setReferrals] = useState([]);
   const [referralsArr, setReferralsArr] = useState([]);
 
-  const {receivedActiveReferral, receivedActiveReferralPending, receivedActiveReferralError} = useReceivedActiveReferral();
+  const {receivedActiveReferral} = useReceivedActiveReferral();
 
   useEffect(() => {
     receivedActiveReferral(1, pageSize, status)

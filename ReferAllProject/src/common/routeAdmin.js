@@ -1,6 +1,6 @@
 /*!*/
 // @material-ui/icons
-import { Dashboard, Person, Mail, Settings, LocalHospital, ThumbDownAlt, ThumbUpAlt } from "@material-ui/icons";
+import { Dashboard, Person, Mail, Settings, ThumbDownAlt, ThumbUpAlt } from "@material-ui/icons";
 import DashboardPage from "../features/dashboard/DashboardPage"
 import { CompletedPage, DeclinedPage, SendReferralPage } from "../features/referral/";
 import { UsersPage } from "../features/users/";

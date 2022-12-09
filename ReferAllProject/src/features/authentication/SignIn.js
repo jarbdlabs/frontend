@@ -30,7 +30,7 @@ export default function SignIn() {
   const classes = useStyles();
 
   const history = useHistory();
-  const {signIn, signInPending, signInError} = useSignIn();
+  const {signIn} = useSignIn();
   const formik = useFormik({
         initialValues: {
             email: '',

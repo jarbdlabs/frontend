@@ -1,5 +1,3 @@
-// import accounting from 'accounting';
-import CONFIG from '../../../config';
 import prettyBytes from 'pretty-bytes';
 
 export default class StringFormatter {

@@ -11,16 +11,11 @@ import moment from 'moment';
 import {DATETIME_VALUE_FROM_DB} from '../../common/utils/DateFormatter';
 
 const AUTH_USER = 'current_user';
-const AUTH_TOKEN = 'user_token';
 
 export default class AuthService {
 
     static login(userData) {
-        // Cookies.set(AUTH_TOKEN, userData);
-        // Cookies.set(AUTH_EXPIRATION, data.expires);
         Cookies.set(AUTH_USER, JSON.stringify(userData), {expires: 86400, sameSite: 'lax'});
-        // localStorage.setItem(AUTH_USER, JSON.stringify(userData));
-        // console.log('EXPIRE date: ', new Date(data.expires));
         console.log("Session Data: ");
         console.log(AuthService.getSessionData());
         return AuthService.getSessionData();
@@ -44,26 +39,17 @@ export default class AuthService {
     }
 
     static logout() {
-        // Cookies.remove(AUTH_TOKEN);
-        // Cookies.remove(AUTH_EXPIRATION);
         Cookies.remove(AUTH_USER, {expires: 86400, sameSite: 'lax'});
-        // localStorage.removeItem(AUTH_USER);
     }
 
     static getAuthUser() {
         const user = Cookies.get(AUTH_USER);
-        // const user = localStorage.getItem(AUTH_USER);
 
         if (!user) {
-            // AuthService.signOut();
-            // throw new Error('No authenticated user found');
             return null;
         }
 
         return JSON.parse(user);
-
-        // TODO: refractor this later to use this below
-        // return new User(JSON.parse(user));
     }
 
     static isLoggedIn() {

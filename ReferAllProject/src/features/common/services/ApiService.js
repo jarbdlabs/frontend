@@ -1,9 +1,8 @@
 import axios from 'axios';
-import CONFIG from './../../../config';
+// import CONFIG from './../../../config';
 import history from '../../../common/history';
 import AuthService from '../../authentication/services/AuthService';
 import {LOGIN_PAGE, AUTH_HOME_PAGE} from '../../authentication/redux/constants';
-import Axios from 'axios';
 
 // const BASE_URL = `${CONFIG.API_PROTOCOL}://${CONFIG.API_BASE_URL}:${CONFIG.API_PORT}`;
 
@@ -126,7 +125,7 @@ export default class ApiService {
             axiosInstance.post('auth', data)
                 .then(
                     res => {
-                        if(res.data.status == 200){
+                        if(res.data.status === 200){
                             resolve(res.data.data);
                         } else {
                             ApiService.rejectError(res, reject);
@@ -263,7 +262,7 @@ export default class ApiService {
             clinic_id = AuthService.getSessionData().user.clinic_id;
         }
         return new Promise((resolve, reject) => {
-            if (clinic_id == -1) {
+            if (clinic_id === -1) {
                 ApiService.rejectError({'response': {'data':"Not Logged In"}}, reject);
             }
             axiosInstance.get(`referral/clinic/${clinic_id}/sent/${page}/${pageSize}/${status}/`, null, config)

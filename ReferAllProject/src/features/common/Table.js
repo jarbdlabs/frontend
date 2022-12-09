@@ -121,12 +121,12 @@ export default function CustomTable(props) {
                 {
                   tableActions !== undefined ? (
                     tableActions.map((prop, key) => {
-                      return (prop.checkStatus == undefined || (prop.checkStatus != undefined && prop.checkStatus && propRow[3] == 'pending')) ?
+                      return (prop.checkStatus === undefined || (prop.checkStatus !== undefined && prop.checkStatus && propRow[3] === 'pending')) ?
                       (
                         <TableCell className={classes.tableCell} key={key}>
                           <Button color="transparent" onClick={() => prop.onClick(keyRow)} style={{'textDecoration':'underline'}}>{prop.label}</Button>
                         </TableCell>
-                      ): (prop.checkStatus != undefined && prop.checkStatus) ? (<TableCell className={classes.tableCell} key={key}></TableCell>):null
+                      ): (prop.checkStatus !== undefined && prop.checkStatus) ? (<TableCell className={classes.tableCell} key={key}></TableCell>):null
                     })
                   ) : null
                 }

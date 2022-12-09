@@ -43,7 +43,7 @@ export default function SentReferral({tableHeaderName, status}) {
 
   const [referrals, setReferrals] = useState([]);
   const [referralsArr, setReferralsArr] = useState([]);
-  const {sentActiveReferral, sentActiveReferralPending, sentActiveReferralError} = useSentActiveReferral();
+  const {sentActiveReferral} = useSentActiveReferral();
 
   const pageSize = 10;
   const [page, setPage] = useState(1);
@@ -61,6 +61,7 @@ export default function SentReferral({tableHeaderName, status}) {
         });
         setReferrals(response.data);
         setReferralsArr(tempReferralsArr);
+        setPage(1);
       });
 
  },[status, refresh, sentActiveReferral]);

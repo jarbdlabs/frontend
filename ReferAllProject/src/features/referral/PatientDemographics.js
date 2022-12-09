@@ -33,7 +33,7 @@ export default function PatientDemographics({specialty, clinic}) {
   const filesLimit = 10;
   const history = useHistory();
   const [fileObjects, setFileObjects] = useState([]);
-  const {sendReferral, sendReferralSuccess, dismissSendReferral, sendReferralError} = useSendReferral();
+  const {sendReferral, sendReferralSuccess, dismissSendReferral} = useSendReferral();
   const closeSendReferral = () => {
     dismissSendReferral();
     history.push(ADMIN_PAGE);

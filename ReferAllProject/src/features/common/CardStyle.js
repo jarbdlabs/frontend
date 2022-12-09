@@ -1,16 +1,5 @@
 import {
-  drawerWidth,
-  transition,
-  boxShadow,
-  defaultFont,
   primaryColor,
-  primaryBoxShadow,
-  infoColor,
-  successColor,
-  warningColor,
-  dangerColor,
-  whiteColor,
-  grayColor,
   blackColor,
   hexToRgb,
 } from "../../common/theme.js";

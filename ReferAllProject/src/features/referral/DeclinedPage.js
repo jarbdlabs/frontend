@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Tabs, Tab } from "@material-ui/core";
+import {  Tabs, Tab } from "@material-ui/core";
 import styles from "../common/CardStyle";
 
 // core components

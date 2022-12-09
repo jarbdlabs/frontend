@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import { Search } from "@material-ui/icons";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-import { GridContainer, GridItem, Card, CardHeader, CardBody, Table, Button, CustomInput} from '../common';
+import { GridContainer, GridItem, Card, CardHeader, CardBody, Table} from '../common';
 import styles from "../common/CardStyle";
 import { useGetSpecialties } from './redux/getSpecialties';
 import { useGetFavoriteClinics } from './redux/getFavoriteClinics';
@@ -22,8 +21,8 @@ export default function FindSpecialty({
   const [options, setOptions] = useState([]);
   const [clinicsArr, setClinicsArr] = useState([]);
   const [clinics, setClinics] = useState([]);
-  const {getSpecialties, getSpecialtiesPending, getSpecialtiesError} = useGetSpecialties();
-  const {getFavoriteClinics, getFavoriteClinicsPending, getFavoriteClinicsError} = useGetFavoriteClinics();
+  const {getSpecialties} = useGetSpecialties();
+  const {getFavoriteClinics} = useGetFavoriteClinics();
 
   useEffect(() => {
     getSpecialties(keyword_search)
@@ -60,7 +59,7 @@ export default function FindSpecialty({
   };
 
   const onInputChange = (event, value, reason) => {
-    if(reason == 'reset'){
+    if(reason === 'reset'){
       let selected_option = options.find(o => o.name === value);
       setSpecialty(selected_option);
       handleNext();

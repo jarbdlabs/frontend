@@ -1,15 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 // @material-ui/core components
-import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import { GridContainer, GridItem, Card, CardHeader, CardBody, CardFooter, CustomInput, Button, DropdownList } from '../common';
-import { ClickAwayListener, MenuItem, MenuList, Grow, Paper, FormGroup, FormControlLabel, Checkbox, Typography} from "@material-ui/core";
+import { FormGroup, FormControlLabel, Checkbox, Typography} from "@material-ui/core";
 import styles from "../common/CardStyle";
 
 const useStyles = makeStyles(styles);
-const userTypeArr = ["Patient Service Rep", "Medical Reviewer", "Medical Admin"];
 
 export default function AddUser(props) {
   const classes = useStyles();

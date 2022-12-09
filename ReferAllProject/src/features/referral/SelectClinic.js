@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import { GridContainer, GridItem, Card, CardHeader, CardBody, Table, Button, CustomInput} from '../common';
+import { GridContainer, GridItem, Card, CardHeader, CardBody, Table } from '../common';
 import styles from "../common/CardStyle";
 import { useGetClinicsBySpecialty } from './redux/getClinicsBySpecialty';
 
@@ -13,7 +13,7 @@ export default function SelectClinic({specialty, onClickClinic}) {
 
   const [clinicsArr, setClinicsArr] = useState([]);
   const [clinics, setClinics] = useState([]);
-  const {getClinicsBySpecialty, getFavoriteClinicsPending, getFavoriteClinicsError} = useGetClinicsBySpecialty();
+  const {getClinicsBySpecialty} = useGetClinicsBySpecialty();
 
   useEffect(() => {
     console.log(specialty)

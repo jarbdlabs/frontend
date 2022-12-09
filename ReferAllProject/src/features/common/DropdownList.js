@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import { Button, GridItem } from '../common';
+import { Button } from '../common';
 import { ClickAwayListener, MenuItem, MenuList, Grow, Paper } from "@material-ui/core";
 import Poppers from "@material-ui/core/Popper";
 
@@ -232,8 +231,7 @@ const styles = (theme) => ({
 
 const useStyles = makeStyles(styles);
 
-export default function DropdownList(props) {
-  const { labelText, id } = props;
+export default function DropdownList({ labelText, id }) {
   const classes = useStyles();
   const [openRole, setOpenRole] = useState(null);
   const handleClickRole = (event) => {
@@ -299,9 +297,3 @@ export default function DropdownList(props) {
     </div>
   );
 };
-
-DropdownList.propTypes = {
-  labelText: PropTypes.string,
-  id: PropTypes.string
-};
-DropdownList.defaultProps = {};

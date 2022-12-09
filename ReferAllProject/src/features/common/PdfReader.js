@@ -15,7 +15,7 @@ export default function PdfReader({referral_id}) {
 	const [pageNumber, setPageNumber] = useState(1);
   const [selectedFile, setSelectedFile] = useState(undefined);
   const [referralFiles, setReferralFiles] = useState([]);
-  const {getReferralFiles, getReferralFilesError} = useGetReferralFiles();
+  const {getReferralFiles} = useGetReferralFiles();
 
   useEffect(() => {
     getReferralFiles(referral_id)

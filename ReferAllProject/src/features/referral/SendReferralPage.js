@@ -2,7 +2,6 @@ import React, {useState}  from 'react';
 import { Stepper, Step, StepLabel, MobileStepper } from "@material-ui/core";  
 import { GridContainer, GridItem, Button, TabPanel } from '../common';
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons";
-import styles from "../common/CardStyle";
 import { FindSpecialty, SelectClinic, PatientDemographics} from './';
 
 // import PropTypes from 'prop-types';
