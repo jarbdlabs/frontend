@@ -1,6 +1,7 @@
 {
   "name": "front",
   "version": "1.0.0",
+  "homepage": "https://gitname.github.io/react-gh-pages",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.4.3",
@@ -89,6 +90,8 @@
     "yup-phone": "^1.2.19"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "cross-env PORT=3100 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
@@ -139,5 +142,8 @@
       "jsx",
       "node"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
