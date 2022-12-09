@@ -1,7 +1,7 @@
 {
   "name": "front",
   "version": "1.0.0",
-  "homepage": "https://gitname.github.io/react-gh-pages",
+  "homepage": "https://jarbdlabs.github.io/frontend",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.4.3",
