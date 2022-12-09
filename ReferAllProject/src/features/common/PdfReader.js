@@ -22,7 +22,7 @@ export default function PdfReader({referral_id}) {
       .then((response) => {
         setReferralFiles(response.data);
         if(response.data.length > 0){
-          setSelectedFile(`http://127.0.0.1:5000/api/referral/file/${response.data[0].saved_filename}`);
+          setSelectedFile(`http://ec2-34-211-142-125.us-west-2.compute.amazonaws.com:80/api/referral/file/${response.data[0].saved_filename}`);
           setPageNumber(1);
         }
       });
@@ -33,7 +33,7 @@ export default function PdfReader({referral_id}) {
 		setNumPages(numPages);
 	};
   const onSelectFile = (index) =>{
-    setSelectedFile(`http://127.0.0.1:5000/api/referral/file/${referralFiles[index].saved_filename}`);
+    setSelectedFile(`http://ec2-34-211-142-125.us-west-2.compute.amazonaws.com:80/api/referral/file/${referralFiles[index].saved_filename}`);
     setPageNumber(1);
   };
 

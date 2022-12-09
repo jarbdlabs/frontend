@@ -32,7 +32,7 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
 
   const downloadFile = (index) => {
     FileSaver.saveAs(
-      `http://127.0.0.1:5000/api/referral/file/${referralFiles[index].saved_filename}`,
+      `http://ec2-34-211-142-125.us-west-2.compute.amazonaws.com:80/api/referral/file/${referralFiles[index].saved_filename}`,
       referralFiles[index].filename
     );
   };
