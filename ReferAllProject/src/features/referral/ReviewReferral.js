@@ -8,11 +8,18 @@ import { useGetReferralPatient } from './redux/getReferralPatient';
 import { GetApp } from '@material-ui/icons';
 import FileSaver from 'file-saver';
 import { useSaveReferralNote } from './redux/saveReferralNote';
-import { Alert,TextareaAutosize, Snackbar } from '@mui/material';
+import { Alert,TextareaAutosize, Snackbar, TextField } from '@mui/material';
 import ViewReferralNotes from './ViewReferralNotes';
 import { useUpdateReferral } from './redux/updateReferral';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import StringFormatter from '../common/utils/StringFormatter';
 
 const useStyles = makeStyles(styles);
+
+const validationSchema = Yup.object({
+
+});
 
 export default function ReviewReferral({referral_id, handleCloseReview, doRefreshList, referral}) {
   const classes = useStyles();
@@ -24,6 +31,16 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
   const {getReferralPatient} = useGetReferralPatient();
   const {saveReferralNote, dismissSaveReferralNote, saveReferralNoteSuccess} = useSaveReferralNote();
   const {updateReferral, dismissUpdateReferral, updateReferralSuccess} = useUpdateReferral();
+
+
+  const formik = useFormik({
+    initialValues: {
+        appointment: ''
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+    }
+  });
 
   const handleNoteChange = (event) => {
     setReferralNote(event.target.value);
@@ -48,6 +65,14 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
 
   const handUpdateReferralStatus = (status) => {
     updateReferral({'status': status},referral_id)
+      .then((response) => {
+        if(response.status === 200){
+        }
+      });
+  };
+
+  const handleScheduleAppointment = (status) => {
+    updateReferral({'status': status, 'appointment': formik.values.appointment},referral_id)
       .then((response) => {
         if(response.status === 200){
         }
@@ -85,6 +110,11 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
     } else if (status === "decline"){
       handUpdateReferralStatus("declined");
     }
+    setOpen(false);
+  };
+
+  const handleAppointmentClose = (date) => {
+    console.log(date);
     setOpen(false);
   };
 
@@ -215,14 +245,30 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
               (referral && referral.status === 'under review') ? <Button color="danger" type="submit" onClick={() => handleClickOpen('decline')} style={{marginRight: '10px'}}>Decline</Button> :null
             }
             {
-              (referral && referral.status === 'accepted') ? <Button color="primary" type="submit" onClick={() => handUpdateReferralStatus('completed')} style={{marginRight: '10px'}}>Schedule</Button> :null
+              (referral && referral.status === 'accepted') ? (
+              <TextField
+                id="appointment"
+                label="Appointment Date: "
+                type="date"
+                value={StringFormatter.removeWhitespace(formik.values.appointment)} 
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                style={{marginRight: "20px"}}
+              />) :null
+            }
+            { 
+              (referral && referral.status === 'accepted') ? (<Button color="primary" type="submit" onClick={() => handleScheduleAppointment('completed')} style={{marginRight: '10px'}} disabled={formik.values.appointment === ""}>Set Appointment</Button>) :null
             }
             
             </CardFooter>
           </Card>
         </GridItem>
       </GridContainer>
-      <ResponsiveDialog status={status} open={open} okLabel={"Confirm"} cancelLabel={"Cancel"} title={"Are you sure you want to "+ status.toUpperCase() + " this referral?"} message={"Please click confirm to proceed."} handleClose={handleClose}/>
+      <ResponsiveDialog status={status} open={open } okLabel={"Confirm"} cancelLabel={"Cancel"} title={"Are you sure you want to "+ status.toUpperCase() + " this referral?"} message={"Please click confirm to proceed."} handleClose={handleClose}/>
     </div>
   );
 };

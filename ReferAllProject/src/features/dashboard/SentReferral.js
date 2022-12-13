@@ -57,7 +57,7 @@ export default function SentReferral({tableHeaderName, status}) {
       .then((response) => {
         console.log(response.data);
         const tempReferralsArr = response.data.map((p) => {
-          return [p.first_name + " " + p.last_name, p.create_date, p.clinic_name, p.status, p.updated_by_first_name + " " + p.updated_by_last_name, p.last_update]
+          return status === "completed" ? [p.first_name + " " + p.last_name, p.create_date, p.clinic_name, p.status, p.appointment_date, p.updated_by_first_name + " " + p.updated_by_last_name, p.last_update]:[p.first_name + " " + p.last_name, p.create_date, p.clinic_name, p.status, p.updated_by_first_name + " " + p.updated_by_last_name, p.last_update]
         });
         setReferrals(response.data);
         setReferralsArr(tempReferralsArr);
@@ -81,7 +81,7 @@ export default function SentReferral({tableHeaderName, status}) {
             <CardBody>
               <Table
                 tableHeaderColor="primary"
-                tableHead={["Patient", "Sent Date", "Sent To", "Status", "Last Updated By", "Last Updated"]}
+                tableHead={status === "completed" ? ["Patient", "Sent Date", "Sent To", "Status", "Appointment Date", "Last Updated By", "Last Updated"]: ["Patient", "Sent Date", "Sent To", "Status", "Last Updated By", "Last Updated"]}
                 tableData={referralsArr}
                 tableActions={[{onClick: (index) => handleOpenNotes(index), label:'View Notes'}, {onClick: (index) => handleOpenPDF(index), label:'View Files'}, {onClick: (index) => handleOpenReview(index), label:'Review', checkStatus: true}]}
               />

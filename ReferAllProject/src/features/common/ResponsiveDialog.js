@@ -18,8 +18,7 @@ export default function ResponsiveDialog({okLabel, cancelLabel, title, message,h
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
-      >
+        aria-labelledby="responsive-dialog-title">
         <DialogTitle id="responsive-dialog-title">
           {title}
         </DialogTitle>

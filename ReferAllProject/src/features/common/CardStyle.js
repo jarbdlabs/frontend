@@ -5,6 +5,11 @@ import {
 } from "../../common/theme.js";
 
 const cardStyles  = (theme) => ({
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
     margin: "0",

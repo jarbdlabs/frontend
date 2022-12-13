@@ -51,7 +51,9 @@ export default function ReceiveReferral({tableHeaderName, status}) {
       .then((response) => {
         console.log(response.data);
         const tempReferralsArr = response.data.map((p) => {
-          return [p.first_name + " " + p.last_name, p.create_date, p.clinic_name, p.status == 'sent' ? 'received':p.status, p.updated_by_first_name + " " + p.updated_by_last_name, p.last_update]
+          
+          return status === "completed" ? [p.first_name + " " + p.last_name, p.create_date, p.clinic_name, p.status == 'sent' ? 'received':p.status, p.appointment_date, p.updated_by_first_name + " " + p.updated_by_last_name, p.last_update]:
+          [p.first_name + " " + p.last_name, p.create_date, p.clinic_name, p.status == 'sent' ? 'received':p.status, p.updated_by_first_name + " " + p.updated_by_last_name, p.last_update]
         });
         setReferrals(response.data);
         setReferralsArr(tempReferralsArr);
@@ -76,7 +78,8 @@ export default function ReceiveReferral({tableHeaderName, status}) {
             <CardBody>
               <Table
                 tableHeaderColor="primary"
-                tableHead={["Patient", "Received Date", " ", "Status", "Last Updated By", "Last Updated"]}
+                tableHead={status === "completed" ? ["Patient", "Received Date", "Clinic Sender", "Status", "Appointment Date", "Last Updated By", "Last Update"] 
+                : ["Patient", "Received Date", "Clinic Sender", "Status", "Last Updated By", "Last Update"]}
                 tableData={referralsArr}
                 tableActions={[{onClick: (index) => handleOpenReview(index), label:'Review'}, {onClick: (index) => handleOpenPDF(index), label:'View Files'}]}
               />
