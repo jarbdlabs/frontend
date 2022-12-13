@@ -1,10 +1,12 @@
 import React from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
+import {useHistory} from 'react-router-dom';
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import {LOGIN_PAGE, ADMIN_PAGE} from './redux/constants';
 // core components
 // import Navbar from "components/Navbars/Navbar.js";
 // import Footer from "components/Footer/Footer.js";
@@ -55,9 +57,11 @@ const styles = (theme) => ({
 const useStyles = makeStyles(styles);
 
 export default function Admin({ ...children }) {
+  const history = useHistory();
+
   const switchRoutes = (
     <Switch>
-      {routes[AuthService.getSessionData().user.role].map((prop, key) => {
+      {routes[AuthService.getSessionData().user === null ? "Dashboard":AuthService.getSessionData().user.role].map((prop, key) => {
         if (prop.layout === "/admin") {
           return (
             <Route
@@ -69,7 +73,7 @@ export default function Admin({ ...children }) {
         }
         return null;
       })}
-      <Redirect from="/admin" to={"/admin" + routes[AuthService.getSessionData().user.role][0].path } />
+      <Redirect from="/admin" to={"/admin" + routes[AuthService.getSessionData().user === null ? 'Dashboard':AuthService.getSessionData().user.role][0].path } />
     </Switch>
   );
   // styles
@@ -107,11 +111,11 @@ export default function Admin({ ...children }) {
       }
       window.removeEventListener("resize", resizeFunction);
     };
-  }, [mainPanel]);
+  }, [history, mainPanel]);
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={routes[AuthService.getSessionData().user.role]}
+        routes={routes[AuthService.getSessionData().user === null ? 'Dashboard':AuthService.getSessionData().user.role]}
         logoText={"REFER ALL"}
         logo={logo}
         image={image}
@@ -122,7 +126,7 @@ export default function Admin({ ...children }) {
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
-          routes={routes[AuthService.getSessionData().user.role]}
+          routes={routes[AuthService.getSessionData().user === null ? 'Dashboard':AuthService.getSessionData().user.role]}
           handleDrawerToggle={handleDrawerToggle}
           {...children}
         />

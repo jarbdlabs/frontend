@@ -264,7 +264,7 @@ export default function AdminNavbarLinks() {
   };
   return (
     <div>
-      <h4 style={{display : 'inline'}}>Hi, {AuthService.getSessionData().user.first_name} !</h4>
+      <h4 style={{display : 'inline'}}>Hi, {AuthService.getSessionData().user === null ? '': AuthService.getSessionData().user.first_name} !</h4>
       <div className={classes.manager}>
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}

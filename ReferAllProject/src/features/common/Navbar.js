@@ -100,7 +100,7 @@ const useStyles = makeStyles(styles);
 
 const useRouteName = () => {
   let name = "";
-  routes[AuthService.getSessionData().user.role].forEach((route) => {
+  routes[AuthService.getSessionData().user === null ? 'Dashboard':AuthService.getSessionData().user.role].forEach((route) => {
     if (window.location.href.indexOf(route.layout + route.path) !== -1) {
       name = routes.rtlActive ? route.rtlName : route.name;
     }

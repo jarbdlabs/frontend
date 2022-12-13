@@ -29,10 +29,10 @@ export default function DashboardPage() {
               <Tab label="Received" id="simple-tab-1" className={selectedTab === 1 ? classes.blue:null}/>
           </Tabs>
           <TabPanel value={selectedTab} index={0}>
-                <SentReferral tableHeaderName={'Active Referrals'} status={AuthService.getSessionData().user.role === "Patient Service Representative" ? "active":"under review"}/>
+                <SentReferral tableHeaderName={'Active Referrals'} status={AuthService.getSessionData().user != null && AuthService.getSessionData().user.role === "Patient Service Representative" ? "active":"under review"}/>
             </TabPanel>
             <TabPanel value={selectedTab} index={1}>
-                <ReceiveReferral tableHeaderName={'Active Referrals'} status={AuthService.getSessionData().user.role === "Patient Service Representative" ? "active":"under review"}/>
+                <ReceiveReferral tableHeaderName={'Active Referrals'} status={AuthService.getSessionData().user != null && AuthService.getSessionData().user.role === "Patient Service Representative" ? "active":"under review"}/>
             </TabPanel>
         </GridItem>
 

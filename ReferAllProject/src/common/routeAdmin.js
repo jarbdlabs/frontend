@@ -6,8 +6,17 @@ import { CompletedPage, DeclinedPage, SendReferralPage } from "../features/refer
 import { UsersPage } from "../features/users/";
 import { SettingsPage } from "../features/settings/";
 import { ClinicsPage } from "../features/clinics";
+import { SignIn } from "../features/authentication";
 
-const adminRoutes = { "Admin":[{
+const adminRoutes = { "Dashboard":[{
+  path: "/dashboard",
+  name: "Dashboard",
+  icon: Dashboard,
+  component: DashboardPage,
+  layout: "/admin"
+}], 
+
+"Admin":[{
   path: "/clinics",
   name: "Clinics",
   icon: Dashboard,
