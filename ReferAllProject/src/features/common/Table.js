@@ -113,7 +113,7 @@ export default function CustomTable(props) {
               <TableRow key={keyRow} className={classes.tableBodyRow}>
                 {propRow.map((prop, key) => {
                   return (
-                    <TableCell className={classes.tableCell} key={key}>
+                    <TableCell className={classes.tableCell} key={key} style={{textTransform: 'capitalize'}}>
                       {prop}
                     </TableCell>
                   );
@@ -121,7 +121,7 @@ export default function CustomTable(props) {
                 {
                   tableActions !== undefined ? (
                     tableActions.map((prop, key) => {
-                      return (prop.checkStatus === undefined || (prop.checkStatus !== undefined && prop.checkStatus && propRow[3] === 'pending')) ?
+                      return (prop.checkStatus === undefined || (prop.checkStatus !== undefined && prop.checkStatus && propRow[3] === 'draft')) ?
                       (
                         <TableCell className={classes.tableCell} key={key}>
                           <Button color="transparent" onClick={() => prop.onClick(keyRow)} style={{'textDecoration':'underline'}}>{prop.label}</Button>

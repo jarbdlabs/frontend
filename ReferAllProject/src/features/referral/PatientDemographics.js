@@ -73,7 +73,7 @@ export default function PatientDemographics({specialty, clinic}) {
 
   const handleSaveDraft = (values) => {
     values['clinic_receiver_id'] = clinic.id;
-    values['status'] = 'pending';
+    values['status'] = 'draft';
     console.log(values);
     console.log(fileObjects);
     const data = {

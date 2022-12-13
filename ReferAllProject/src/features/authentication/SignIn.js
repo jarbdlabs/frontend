@@ -41,7 +41,6 @@ export default function SignIn() {
           console.log(values);
             signIn({...values})
               .then((response) => {
-                console.log("JARLOU");
                 const token = response.token;
                 
                 if(token){

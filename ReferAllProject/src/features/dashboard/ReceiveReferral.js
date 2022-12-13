@@ -51,7 +51,7 @@ export default function ReceiveReferral({tableHeaderName, status}) {
       .then((response) => {
         console.log(response.data);
         const tempReferralsArr = response.data.map((p) => {
-          return [p.first_name + " " + p.last_name, p.create_date, p.clinic_name, p.status, p.updated_by_first_name + " " + p.updated_by_last_name, p.last_update]
+          return [p.first_name + " " + p.last_name, p.create_date, p.clinic_name, p.status == 'sent' ? 'received':p.status, p.updated_by_first_name + " " + p.updated_by_last_name, p.last_update]
         });
         setReferrals(response.data);
         setReferralsArr(tempReferralsArr);

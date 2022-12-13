@@ -187,7 +187,7 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
             </CardBody>
             <CardFooter style={{justifyContent: 'center', alignItems: 'center'}}> 
             {
-              (referral && referral.status === 'pending') ? <Button color="primary" type="button" onClick={() => handUpdateReferralStatus('sent')} style={{marginRight: '10px'}}>Send Referral</Button> :null
+              (referral && referral.status === 'draft') ? <Button color="primary" type="button" onClick={() => handUpdateReferralStatus('sent')} style={{marginRight: '10px'}}>Send Referral</Button> :null
             }
             {
               (referral && referral.status === 'sent') ? <Button color="primary" type="button" onClick={() => handUpdateReferralStatus('under review')} style={{marginRight: '10px'}}>Ready for Review</Button> :null
@@ -199,10 +199,7 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
               (referral && referral.status === 'under review') ? <Button color="danger" type="submit" onClick={() => handUpdateReferralStatus('declined')} style={{marginRight: '10px'}}>Decline</Button> :null
             }
             {
-              (referral && referral.status === 'accepted') ? <Button color="primary" type="submit" onClick={() => handUpdateReferralStatus('scheduled')} style={{marginRight: '10px'}}>Schedule</Button> :null
-            }
-            {
-              (referral && referral.status === 'scheduled') ? <Button color="primary" type="submit" onClick={() => handUpdateReferralStatus('completed')} style={{marginRight: '10px'}}>Complete</Button> :null
+              (referral && referral.status === 'accepted') ? <Button color="primary" type="submit" onClick={() => handUpdateReferralStatus('completed')} style={{marginRight: '10px'}}>Schedule</Button> :null
             }
             
             </CardFooter>
