@@ -140,15 +140,8 @@ export default class ApiService {
     }
 
     static getSpecialties(keyword_search) {
-        const config = { 
-                'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`specialty/${keyword_search}`, null, config)
+            axiosInstance.get(`specialty/${keyword_search}`, null)
                 .then(
                     res => {
                         resolve(res.data);
@@ -161,16 +154,9 @@ export default class ApiService {
     }
 
     static getFavoriteClinics() {
-        const config = { 
-                'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
-        let user_id = AuthService.getSessionData().user.user_id;
+        let user_id = AuthService.getSessionData().user == null ? -1:AuthService.getSessionData().user.user_id;
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`clinic/${user_id}/favorites`, null, config)
+            axiosInstance.get(`clinic/${user_id}/favorites`, null)
                 .then(
                     res => {
                         resolve(res.data);
@@ -183,15 +169,8 @@ export default class ApiService {
     }
 
     static getClinicsBySpecialty(specialty_id) {
-        const config = { 
-                'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`clinic/${specialty_id}/specialty`, null, config)
+            axiosInstance.get(`clinic/${specialty_id}/specialty`, null)
                 .then(
                     res => {
                         resolve(res.data);
@@ -204,15 +183,8 @@ export default class ApiService {
     }
 
     static getClinics() {
-        const config = { 
-                'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`clinic`, null, config)
+            axiosInstance.get(`clinic`, null)
                 .then(
                     res => {
                         resolve(res.data);
@@ -251,13 +223,6 @@ export default class ApiService {
     }
 
     static getSentActiveReferrals(page, pageSize, status) {
-        const config = { 
-                'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
         var clinic_id = -1;
         if(AuthService.getSessionData().user != null){
             clinic_id = AuthService.getSessionData().user.clinic_id;
@@ -266,7 +231,7 @@ export default class ApiService {
             if (clinic_id === -1) {
                 ApiService.rejectError({'response': {'data':"Not Logged In"}}, reject);
             }
-            axiosInstance.get(`referral/clinic/${clinic_id}/sent/${page}/${pageSize}/${status}/`, null, config)
+            axiosInstance.get(`referral/clinic/${clinic_id}/sent/${page}/${pageSize}/${status}/`, null)
                 .then(
                     res => {
                         resolve(res.data);
@@ -279,16 +244,12 @@ export default class ApiService {
     }
 
     static getReceivedActiveReferrals(page, pageSize, status) {
-        const config = { 
-                'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
+        var clinic_id = -1;
+        if(AuthService.getSessionData().user != null){
+            clinic_id = AuthService.getSessionData().user.clinic_id;
         }
-        let clinic_id = AuthService.getSessionData().user.clinic_id;
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`referral/clinic/${clinic_id}/received/${page}/${pageSize}/${status}/`, null, config)
+            axiosInstance.get(`referral/clinic/${clinic_id}/received/${page}/${pageSize}/${status}/`, null)
                 .then(
                     res => {
                         resolve(res.data);
@@ -301,15 +262,8 @@ export default class ApiService {
     }
 
     static getReferralFiles(referral_id) {
-        const config = { 
-                'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`referral/${referral_id}/files`, null, config)
+            axiosInstance.get(`referral/${referral_id}/files`, null)
                 .then(
                     res => {
                         resolve(res.data);
@@ -322,15 +276,8 @@ export default class ApiService {
     }
 
     static getReferralPatient(referral_id) {
-        const config = { 
-                'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`referral/${referral_id}/patient`, null, config)
+            axiosInstance.get(`referral/${referral_id}/patient`, null)
                 .then(
                     res => {
                         resolve(res.data);
@@ -343,18 +290,11 @@ export default class ApiService {
     }
 
     static saveReferralNote(data, referral_id) {
-        const config = { 
-            'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
-        let user_id = AuthService.getSessionData().user.user_id;
+        let user_id = AuthService.getSessionData().user === null ? -1:AuthService.getSessionData().user.user_id;
         data['user_id'] = user_id;
 
         return new Promise((resolve, reject) => {
-            axiosInstance.put(`/referral/${referral_id}/note`, data, config)
+            axiosInstance.put(`/referral/${referral_id}/note`, data)
                 .then(
                     res => {
                         resolve(res.data);
@@ -367,16 +307,8 @@ export default class ApiService {
     }
 
     static getReferralNote(referral_id, page, pageSize) {
-        const config = { 
-            'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
-
         return new Promise((resolve, reject) => {
-            axiosInstance.get(`/referral/${referral_id}/note/${page}/${pageSize}`, null, config)
+            axiosInstance.get(`/referral/${referral_id}/note/${page}/${pageSize}`, null)
                 .then(
                     res => {
                         resolve(res.data);
@@ -389,18 +321,11 @@ export default class ApiService {
     }
 
     static updateReferral(data, referral_id) {
-        const config = { 
-            'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AuthService.getSessionData().token}`
-            }
-        }
-        let user_id = AuthService.getSessionData().user.user_id;
+        let user_id = AuthService.getSessionData().user === null ? -1:AuthService.getSessionData().user.user_id;
         data['user_id'] = user_id;
 
         return new Promise((resolve, reject) => {
-            axiosInstance.put(`/referral/${referral_id}/status/`, data, config)
+            axiosInstance.put(`/referral/${referral_id}/status/`, data)
                 .then(
                     res => {
                         resolve(res.data);
