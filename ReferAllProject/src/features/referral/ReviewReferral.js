@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import { makeStyles } from "@material-ui/core/styles";
-import { GridContainer, GridItem, Card, CardHeader, CardBody, CardFooter, Button } from '../common';
+import { GridContainer, GridItem, Card, CardHeader, CardBody, CardFooter, Button, ResponsiveDialog } from '../common';
 import styles from "../common/CardStyle";
 import { useGetReferralFiles } from '../common/redux/getReferralFiles';
 import { useGetReferralPatient } from './redux/getReferralPatient';
@@ -71,6 +71,22 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
       });
   },[referral_id, getReferralFiles, getReferralPatient]);
 
+  const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState("");
+
+  const handleClickOpen = (status) => {
+    setStatus(status);
+    setOpen(true);
+  };
+
+  const handleClose = (status) => {
+    if(status === "accept"){
+      handUpdateReferralStatus("accepted");
+    } else if (status === "decline"){
+      handUpdateReferralStatus("declined");
+    }
+    setOpen(false);
+  };
 
   return (
     <div >
@@ -163,7 +179,7 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  <h4 className={classes.tableSubTitleBlack}>Previous Referrals : </h4>
+                  <h4 className={classes.tableSubTitleBlack} style={{marginTop:"15px"}}>Previous Referrals : </h4>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={12}>
                   <h5 className={classes.tableContentBlack}>No data available</h5>
@@ -193,10 +209,10 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
               (referral && referral.status === 'sent') ? <Button color="primary" type="button" onClick={() => handUpdateReferralStatus('under review')} style={{marginRight: '10px'}}>Ready for Review</Button> :null
             }
             {
-              (referral && referral.status === 'under review') ? <Button color="primary" type="submit" onClick={() => handUpdateReferralStatus('accepted')} style={{marginRight: '10px'}}>Accept</Button> :null
+              (referral && referral.status === 'under review') ? <Button color="primary" type="submit" onClick={() => handleClickOpen('accept')} style={{marginRight: '10px'}}>Accept</Button> :null
             }
             {
-              (referral && referral.status === 'under review') ? <Button color="danger" type="submit" onClick={() => handUpdateReferralStatus('declined')} style={{marginRight: '10px'}}>Decline</Button> :null
+              (referral && referral.status === 'under review') ? <Button color="danger" type="submit" onClick={() => handleClickOpen('decline')} style={{marginRight: '10px'}}>Decline</Button> :null
             }
             {
               (referral && referral.status === 'accepted') ? <Button color="primary" type="submit" onClick={() => handUpdateReferralStatus('completed')} style={{marginRight: '10px'}}>Schedule</Button> :null
@@ -206,7 +222,7 @@ export default function ReviewReferral({referral_id, handleCloseReview, doRefres
           </Card>
         </GridItem>
       </GridContainer>
-      
+      <ResponsiveDialog status={status} open={open} okLabel={"Confirm"} cancelLabel={"Cancel"} title={"Are you sure you want to "+ status.toUpperCase() + " this referral?"} message={"Please click confirm to proceed."} handleClose={handleClose}/>
     </div>
   );
 };

@@ -18,3 +18,4 @@ export { default as CardStyle } from './CardStyle';
 export { default as ModalStyle } from './ModalStyle';
 export { default as TabPanel } from './TabPanel';
 export { default as DatePickers } from './DatePickers';
+export { default as ResponsiveDialog } from './ResponsiveDialog';
