@@ -6,7 +6,7 @@ import {LOGIN_PAGE, AUTH_HOME_PAGE} from '../../authentication/redux/constants';
 
 // const BASE_URL = `${CONFIG.API_PROTOCOL}://${CONFIG.API_BASE_URL}:${CONFIG.API_PORT}`;
 
-const BASE_URL = "http://ec2-34-211-142-125.us-west-2.compute.amazonaws.com:80/api/";
+const BASE_URL = "http://ec2-54-245-142-93.us-west-2.compute.amazonaws.com:80/api/";
 // const BASE_URL = "http://127.0.0.1:5000/api/";
 // const token = '';
 // const API_BASE_URL = `${BASE_URL}/${CONFIG.API_INDEX}`;
